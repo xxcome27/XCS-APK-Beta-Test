@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XC-Store - Download APK Beta</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg: #f1f2f6;
+    --text: #222;
+    --card: #ffffff;
+    --border: #eee;
+    --item: #fafafa;
+    --progress-bg: #eaeaea;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+.dark {
+    --bg: #0f172a;
+    --text: #e5e7eb;
+    --card: #111827;
+    --border: #1f2937;
+    --item: #0b1221;
+    --progress-bg: #1f2937;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 10px 20px 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 35px 10px 10px;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 6px;
+}
+
+.hero p {
+    font-size: 14px;
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #ffb300;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 14px 34px;
+    background: #ffcc00;
+    color: #000;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #f0b900;
+}
+
+.badges {
+    margin-top: 12px;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin: 4px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 16px;
+    border: 1px solid var(--border);
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.item {
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--item);
+    border: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.warning {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.quota-box {
+    margin-top: 14px;
+}
+
+.progress-container {
+    width: 100%;
+    max-width: 340px;
+    margin: auto;
+    background: var(--progress-bg);
+    border-radius: 20px;
+    height: 14px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #ffcc00;
+    border-radius: 20px;
+    transition: 0.6s ease;
+}
+
+.quota-info {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+/* TOGGLE ICON DARK MODE */
+
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.btn.disabled {
+    background: #888 !important;
+    color: #ddd !important;
+    pointer-events: none;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 20px;
+    font-size: 13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="hero">
+
+        <div class="theme-toggle" onclick="toggleDark()" id="themeIcon">
+            🌙
+        </div>
+
+        <h1>XC-Store Beta Test</h1>
+
+        <p>
+            🎉 <b>Kabar Baik!</b>  
+            Aplikasi <span class="highlight">XC-Store</span> sedang membuka program <b>Beta Tester</b> untuk publik.
+            Jadilah pengguna pertama yang mencoba aplikasi transaksi digital paling praktis, cepat, dan murah.
+        </p>
+
+        <p style="margin-top:8px;">
+            Program beta ini <b>sangat terbatas hanya untuk 50 orang pertama</b>.  
+            Setelah kuota penuh, pendaftaran akan ditutup sementara!
+        </p>
+
+        <a href="#" id="downloadBtn" class="btn">Download APK Sekarang</a>
+
+        <div class="quota-box">
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+            <div id="quotaInfo" class="quota-info"></div>
+        </div>
+
+        <div class="badges">
+            <span class="badge">Versi 5.0.0</span>
+            <span class="badge">Android</span>
+            <span class="badge">Ringan & Cepat</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="title">Kenapa Harus Ikut Beta Tester?</div>
+
+        <div class="grid">
+            <div class="item">Akses lebih awal sebelum rilis publik</div>
+            <div class="item">Harga lebih murah & stabil</div>
+            <div class="item">Bisa memberikan saran fitur</div>
+            <div class="item">Update fitur lebih cepat</div>
+            <div class="item">Pengalaman aplikasi lebih ringan</div>
+            <div class="item">Transaksi otomatis 24 jam</div>
+        </div>
+
+        <div class="warning">
+            ⚠️ <b>Catatan:</b>  
+            Karena masih tahap pengembangan, masukan dan saran dari kamu akan sangat membantu kami menyempurnakan aplikasi ini.
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 XC-Store – Program Beta Tester
+    </div>
+
+</div>
+
+<script>
+
+// ===== KONFIGURASI KUOTA =====
+let totalQuota = 50;
+let acceptedUser = 27;   // 👈 UBAH ANGKA INI SESUAI MEMBER YANG SUDAH DITERIMA
+let apkLink = "https://download.bukaolshop.com/files/apk/xcstore.apk";
+// ==============================
+
+function updateQuota() {
+
+    let progress = document.getElementById("progressBar");
+    let info = document.getElementById("quotaInfo");
+    let btn = document.getElementById("downloadBtn");
+
+    let percentage = (acceptedUser / totalQuota) * 100;
+    if (percentage > 100) percentage = 100;
+
+    progress.style.width = percentage + "%";
+
+    let sisa = totalQuota - acceptedUser;
+
+    if (sisa > 0) {
+        info.innerText = acceptedUser + " / " + totalQuota + " telah terisi – Sisa " + sisa + " orang";
+        btn.classList.remove("disabled");
+    } else {
+        info.innerText = "Maaf, kuota beta tester sudah penuh.";
+        btn.classList.add("disabled");
+        btn.innerText = "Kuota Penuh";
+    }
+}
+
+updateQuota();
+
+document.getElementById("downloadBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    if (acceptedUser >= totalQuota) {
+        alert("Kuota beta tester sudah penuh. Tunggu pembukaan gelombang berikutnya ya!");
+        return;
+    }
+
+    window.location.href = apkLink;
+});
+
+// ===== DARK MODE ICON TOGGLE =====
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+
+    let icon = document.getElementById("themeIcon");
+
+    if (document.body.classList.contains("dark")) {
+        icon.innerHTML = "☀️";
+        localStorage.setItem("xcstore_theme", "dark");
+    } else {
+        icon.innerHTML = "🌙";
+        localStorage.setItem("xcstore_theme", "light");
+    }
+}
+
+if (localStorage.getItem("xcstore_theme") === "dark") {
+    document.body.classList.add("dark");
+    document.getElementById("themeIcon").innerHTML = "☀️";
+}
+
+</script>
+
+</body>
+</html>
